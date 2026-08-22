@@ -1,0 +1,1 @@
+(ns egg.math)
