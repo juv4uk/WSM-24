@@ -14,3 +14,16 @@
 
    :z (* (Math/sin t)
          (Math/sin ε))})
+
+;; Restored 2026-08-22: brahmanda.core references sphere/equator but the
+;; last chat iteration of sphere.clj only kept ecliptic. Celestial equator
+;; = great circle with declination 0 (y-z components of ecliptic without
+;; the axial tilt rotation).
+(defn equator
+  [t]
+
+  {:x (Math/cos t)
+
+   :y (Math/sin t)
+
+   :z 0.0})

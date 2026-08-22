@@ -1,0 +1,42 @@
+;; M0 smoke run: brahmanda curve vs circle vs quint-ellipse
+;; Usage: my-lisp mylisp/main.my   (from the WSM-24 repo root)
+
+
+
+
+;; unit circle sampled at n points
+(def circle-points
+  (lambda (n)
+    (map (lambda (i)
+           (let ((t (* 2.0 pi-approx (/ i n))))
+             (list (my-cos t) (my-sin t))))
+         (numbers-up-to n))))
+
+;; quint ellipse: axes ratio 3:2 — the hypothesis from the chat
+(def quint-ellipse
+  (lambda (n)
+    (map (lambda (i)
+           (let ((t (* 2.0 pi-approx (/ i n))))
+             (list (* (/ 2.0 3.0) (my-cos t)) (my-sin t))))
+         (numbers-up-to n))))
+
+(def cap 128)
+
+(print "=== WSM-24 brahmanda comparison (my-lisp edition) ===")
+
+;; sanity: sin/cos against known anchors
+(print (string-append "sin(pi/2) ~ " (number->string (my-sin (/ pi-approx 2.0)))))
+(print (string-append "cos(0)     ~ " (number->string (my-cos 0))))
+
+;; the curve itself
+(def curve (generate-brahmanda 256))
+(print (string-append "brahmanda points: " (number->string (length curve))))
+
+(def c   (circle-points 256))
+(def q   (quint-ellipse 256))
+
+(print "self-score (curve vs curve):      " (compare-shapes curve curve cap))
+(print "curve vs circle:                  " (compare-shapes curve c cap))
+(print "curve vs quint-ellipse:           " (compare-shapes curve q cap))
+(print "circle vs quint-ellipse:          " (compare-shapes c q cap))
+(print "(lower = closer; quint 3:2 hypothesis lives or dies on real EPE data later)")

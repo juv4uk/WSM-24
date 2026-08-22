@@ -34,24 +34,24 @@
 
   (str
     "<circle "
-    "cx=\\"" cx "\\" "
-    "cy=\\"" cy "\\" "
-    "r=\\"" (* scale r) "\\" "
-    "fill=\\"none\\" "
-    "stroke=\\"" color "\\" "
-    "stroke-width=\\"1\\"/>"))
+    "cx=\"" cx "\" "
+    "cy=\"" cy "\" "
+    "r=\"" (* scale r) "\" "
+    "fill=\"none\" "
+    "stroke=\"" color "\" "
+    "stroke-width=\"1\"/>"))
 
 (defn line
   [x1 y1 x2 y2 color]
 
   (str
     "<line "
-    "x1=\\"" x1 "\\" "
-    "y1=\\"" y1 "\\" "
-    "x2=\\"" x2 "\\" "
-    "y2=\\"" y2 "\\" "
-    "stroke=\\"" color "\\" "
-    "stroke-width=\\"1\\"/>"))
+    "x1=\"" x1 "\" "
+    "y1=\"" y1 "\" "
+    "x2=\"" x2 "\" "
+    "y2=\"" y2 "\" "
+    "stroke=\"" color "\" "
+    "stroke-width=\"1\"/>"))
 
 (defn polyline
   [points color]
@@ -65,10 +65,10 @@
 
     (str
       "<polyline "
-      "fill=\\"none\\" "
-      "stroke=\\"" color "\\" "
-      "stroke-width=\\"2\\" "
-      "points=\\"" pts "\\"/>")))
+      "fill=\"none\" "
+      "stroke=\"" color "\" "
+      "stroke-width=\"2\" "
+      "points=\"" pts "\"/>")))
 
 ;; ==========================================
 ;; Документ
@@ -78,13 +78,13 @@
   [& body]
 
   (str
-    "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>\\n"
+    "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\\n"
 
     "<svg "
-    "xmlns=\\"http://www.w3.org/2000/svg\\" "
-    "width=\\"" width "\\" "
-    "height=\\"" height "\\" "
-    "viewBox=\\"0 0 " width " " height "\\">\\n"
+    "xmlns=\"http://www.w3.org/2000/svg\" "
+    "width=\"" width "\" "
+    "height=\"" height "\" "
+    "viewBox=\"0 0 " width " " height "\">\\n"
 
     (apply str body)
 
