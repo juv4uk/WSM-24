@@ -103,3 +103,32 @@
   (lambda (a b cap)
     (chamfer2 (quantize (subsample (normalize a) cap))
               (quantize (subsample (normalize b) cap)))))
+
+;; rational -> decimal string via long division.
+;; core.my's number->string handles INTEGERS only: for 1/3 it calls
+;; digit->string on 1/3, which does (nth 1/3 <digit-table>) -- the
+;; fractional index descends cdr forever and dies on the empty list.
+;; This helper prints any positive rational with `k` fraction digits.
+(def rat-frac-digits
+  (lambda (rem k)
+    (cond ((= k 0) "")
+          ((= rem 0) "")
+          (t (let ((d (quotient (* 10 rem) 1)))
+               (string-append
+                 (number->string d)
+                 (rat-frac-digits (- (* 10 rem) d) (- k 1))))))))
+
+(def rat->string-d
+  (lambda (x k)
+    (let* ((neg (< x 0))
+          (v (cond ((< x 0) (- 0 x)) (t x)))
+          (ip (quotient v 1))
+          (rem (- v ip)))
+      (cond ((= rem 0) (number->string ip))
+            (t (string-append
+                 (cond (neg "-") (t ""))
+                 (string-append (number->string ip)
+                                (string-append "." (rat-frac-digits rem k)))))))))
+
+(def rat->string
+  (lambda (x) (rat->string-d x 6)))
