@@ -1,0 +1,15 @@
+; tasks.my — durable task plan for WSM-24 ("Watch dial as world map").
+; This project appears unrelated to the my-lisp/wsm agent-coordination
+; ecosystem (horology, not language/hardware research) -- this entry is
+; intentionally light, not forcing an ecosystem-shaped plan onto a
+; project that may not need one.
+
+((tasks . (
+  ("WSM-24-CONFIRM-ECOSYSTEM-RELATIONSHIP" . (
+    (priority . 2.0)
+    (capabilities . (documentation))
+    (origin . WSM-24)
+    (description . "Confirm whether WSM-24 has any real connection to the my-lisp/wsm agent ecosystem beyond a name that happens to start with WSM, or is a fully independent personal project (watch-dial-as-world-map design). If independent, a one-line note in the README saying so is enough -- do not build out swarm/task-registry infrastructure here just because sibling repos have it, if it genuinely doesn't apply.")
+    (done . ())
+  ))
+)))
